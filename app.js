@@ -1,20 +1,32 @@
+//A Simple Digital Clock using Venila JavaScript
+// Author: Rupom Raz
+
+
 let hour = document.getElementById("hour");
-let minutes = document.getElementById("minute");
+let minute = document.getElementById("minute");
 let second = document.getElementById("second");
 let progress = document.getElementById("progress");
 
-let showCurrentTime = () => {
-  let date = new Date();
-  let hr = date.getHours();
-  let min = date.getMinutes();
-  let sec = date.getSeconds();
-  hr = hr ? hr : 12;
+let myClock = () => {
+  let now = new Date();
+  let hr = now.getHours();
+  let min = now.getMinutes();
+  let sec = now.getSeconds();
+
+  if (hr == 0) {
+    hr = "12";
+  } else if (hr > 12) {
+    hr = hr - 12;
+  }
+
+  hr = hr < 10 ? "0" + hr : hr;
+  min = min < 10 ? "0" + min : min;
+  sec = sec < 10 ? "0" + sec : sec;
 
   hour.textContent = hr;
-  minutes.textContent = min;
+  minute.textContent = min;
   second.textContent = sec;
 
   progress.style.width = (sec / 60) * 100 + "%";
 };
-
-setInterval(showCurrentTime, 1000);
+setInterval(myClock, 1000);
